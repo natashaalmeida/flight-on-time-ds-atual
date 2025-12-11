@@ -3,7 +3,7 @@
 ## Sobre o Projeto
 Este repositório contém o motor de Inteligência Artificial do projeto FlightOnTime, desenvolvido durante a Simulação da No Country.
 
-O objetivo do MVP é fornecer um microserviço capaz de calcular a probabilidade de atraso de voos comerciais no Brasil. O modelo utiliza dados históricos de operações para identificar padrões de risco baseados em companhia aérea, rota, data, horário e distância.
+O objetivo do MVP é fornecer um microserviço capaz de calcular a probabilidade de atraso de voos comerciais no Brasil. O modelo utiliza dados históricos de operações para identificar padrões de risco baseados em companhia aérea, rota, data, horário, distância e **feriados nacionais**.
 
 ## Arquitetura e Tecnologias
 A solução foi construída com foco em simplicidade de integração e robustez.
@@ -30,14 +30,14 @@ O modelo atual opera com uma lógica de **Risco Escalonado** para apoiar a decis
     * 🟢 **BAIXO (< 40%):** Previsão de Pontualidade.
     * 🟡 **MÉDIO (40% - 60%):** Estado de Alerta (Monitorar).
     * 🔴 **ALTO (> 60%):** Alta probabilidade de Atraso.
-* **Métrica Principal:** Priorizamos o Recall (Sensibilidade) de 86% para garantir alertas de segurança.
+* **Métrica Principal:** Priorizamos o Recall (Sensibilidade) de **87%** para garantir alertas de segurança.
 
 ## Guia de Instalação e Execução (Local)
 
 ### 1. Preparar o Ambiente
 Certifique-se de ter o Python instalado. Recomenda-se o uso de um ambiente virtual (venv).
 
-Instale as dependências do projeto:
+Instale as dependências do projeto (agora inclui a lib `holidays`):
 ```bash
 pip install -r requirements.txt
 ```
@@ -58,7 +58,7 @@ python -m uvicorn src.app:app --reload
 ```
 A API estará disponível em: `http://127.0.0.1:8000`
 
-## Documentação da API (Contrato V2)
+## Documentação da API (Contrato V3)
 
 **Endpoint:** `POST /predict`
 
