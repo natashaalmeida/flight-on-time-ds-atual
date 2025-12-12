@@ -5,7 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import recall_score, accuracy_score
 import joblib
-import holidays  # <--- NUEVA LIBRERÍA
+import holidays
 import os
 
 # --- FUNCIONES AUXILIARES ---
@@ -19,11 +19,10 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return r * 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
 
 def eh_feriado(data, calendario):
-    """Retorna 1 se for feriado, 0 caso contrário"""
     return 1 if data in calendario else 0
 
 # --- CONFIGURACIÓN ---
-print("🚀 Iniciando treinamento V3 (Com Feriados + Distância)...")
+print("🚀 Iniciando treinamento V4 (Limpeza Avançada + Outliers)...")
 current_dir = os.path.dirname(__file__)
 data_path = os.path.join(current_dir, '../data/BrFlights2.csv')
 model_path = os.path.join(current_dir, 'flight_classifier_mvp.joblib')
@@ -35,30 +34,46 @@ except FileNotFoundError:
     print("❌ Erro: BrFlights2.csv não encontrado.")
     exit()
 
-# 2. LIMPIEZA
-df = df[df['Situacao.Voo'] == 'Realizado'].dropna(subset=['Partida.Prevista', 'Partida.Real', 'LatOrig', 'LongDest'])
+# 2. LIMPIEZA INICIAL (NUEVO)
+print(f"📊 Registros iniciais: {len(df)}")
+df.drop_duplicates(inplace=True)
+print(f"📉 Após remover duplicados: {len(df)}")
+
+df = df[df['Situacao.Voo'] == 'Realizado'].dropna(subset=['Partida.Prevista', 'Partida.Real', 'Chegada.Real', 'LatOrig', 'LongDest'])
 
 # 3. FEATURE ENGINEERING
-print("⚙️ Criando features (Feriados, Distância, Tempo)...")
+print("⚙️ Criando features e limpando outliers...")
 
 # A. Distância
 df['distancia_km'] = haversine_distance(df['LatOrig'], df['LongOrig'], df['LatDest'], df['LongDest'])
 
-# B. Datas e Feriados
-df['Partida.Prevista'] = pd.to_datetime(df['Partida.Prevista'])
-df['Partida.Real'] = pd.to_datetime(df['Partida.Real'])
+# B. Datas e Tempos
+cols_datas = ['Partida.Prevista', 'Partida.Real', 'Chegada.Real']
+for col in cols_datas:
+    df[col] = pd.to_datetime(df[col], errors='coerce')
 
-# Calendário Brasil
+# Remover falhas de conversão de data
+df = df.dropna(subset=cols_datas)
+
+# C. Cálculos para Filtros (NUEVO)
+df['delay_minutes'] = (df['Partida.Real'] - df['Partida.Prevista']).dt.total_seconds() / 60
+df['duration_minutes'] = (df['Chegada.Real'] - df['Partida.Real']).dt.total_seconds() / 60
+
+# D. Filtros de Consistência e Outliers (NUEVO - Igual al Notebook)
+# Regra 1: Duração deve ser positiva
+# Regra 2: Atraso entre -60 min (adiantado) e 1440 min (24h)
+mask_clean = (df['duration_minutes'] > 0) & (df['delay_minutes'] > -60) & (df['delay_minutes'] < 1440)
+df = df[mask_clean].copy()
+print(f"✅ Registros limpos para treino: {len(df)}")
+
+# E. Feriados e Outras Features
 br_holidays = holidays.Brazil()
 df['is_holiday'] = df['Partida.Prevista'].apply(lambda x: eh_feriado(x, br_holidays))
-
-# Features Temporais
 df['hora'] = df['Partida.Prevista'].dt.hour
 df['dia_semana'] = df['Partida.Prevista'].dt.dayofweek
 df['mes'] = df['Partida.Prevista'].dt.month
 
-# C. Target (> 15 min atraso)
-df['delay_minutes'] = (df['Partida.Real'] - df['Partida.Prevista']).dt.total_seconds() / 60
+# F. Target (> 15 min atraso)
 df['target'] = np.where(df['delay_minutes'] > 15, 1, 0)
 
 # Renomear
@@ -74,7 +89,6 @@ for col in ['companhia', 'origem', 'destino']:
     encoders[col] = le
 
 # 5. TREINO
-# Lista ATUALIZADA de features
 features = [
     'companhia_encoded', 'origem_encoded', 'destino_encoded', 
     'distancia_km', 'hora', 'dia_semana', 'mes', 'is_holiday'
@@ -83,22 +97,22 @@ features = [
 X = df[features]
 y = df['target']
 
-print(f"🧠 Treinando Random Forest (n=100, depth=15) com {len(X)} registros...")
-# Usamos class_weight='balanced' para lidar com o desbalanceamento
+print(f"🧠 Treinando Random Forest (n=100, depth=15)...")
 model = RandomForestClassifier(n_estimators=100, max_depth=15, class_weight='balanced', random_state=42, n_jobs=-1)
 model.fit(X, y)
 
 # 6. EXPORTAR ARTEFATOS
-print("💾 Salvando modelo e metadados...")
+print("💾 Salvando modelo V4...")
 artifact = {
     'model': model,
     'encoders': encoders,
     'features': features,
     'metadata': {
-        'version': '3.0',
-        'threshold': 0.40,  # O limite otimizado que você descobriu no notebook
+        'version': '4.0',
+        'desc': 'Cleaned Data + Outlier Removal',
+        'threshold': 0.40, 
         'author': 'Dragos Team'
     }
 }
 joblib.dump(artifact, model_path)
-print(f"✅ Modelo V3 salvo em: {model_path}")
+print(f"✅ Modelo V4 salvo em: {model_path}")
