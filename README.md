@@ -153,7 +153,7 @@ curl -X POST "http://flight-on-time.ds.vm3.arbly.com/predict" \
 
 O MVP atual (v3.0) atinge **89% de Recall** focando em variáveis endógenas (Data, Rota, Companhia). Para a próxima fase, desenhamos uma arquitetura para capturar variáveis exógenas e dinâmicas, visando superar a barreira dos 92% de assertividade.
 
-### 1. ⛈️ Integração Meteorológica em Tempo Real (Hiper-local)
+### 1.  Integração Meteorológica em Tempo Real (Hiper-local)
 * **O Desafio:** O modelo atual aprendeu a "sazonalidade climática" (ex: sabe que chove muito em SP em janeiro). Porém, ele pode gerar um "Falso Positivo" em um dia de janeiro que esteja ensolarado.
 * **A Solução:** Conectar o backend a APIs de clima *Enterprise* (NOAA / OpenWeatherMap) para injetar dados reais do momento da decolagem.
 * **Novas Features:**
@@ -162,7 +162,7 @@ O MVP atual (v3.0) atinge **89% de Recall** focando em variáveis endógenas (Da
     * `teto_visibilidade_m`: Neblina fechando o aeroporto.
 * **Ganho Estimado:** Redução de 15% nos alertas falsos (melhora na Precisão).
 
-### 2. 🛫 Monitoramento de Tráfego Aéreo (Efeito Dominó)
+### 2.  Monitoramento de Tráfego Aéreo (Efeito Dominó)
 * **O Desafio:** Atrasos na aviação funcionam em cascata. Se um voo atrasa em Brasília, a aeronave chega atrasada em Guarulhos, atrasando a próxima decolagem, mesmo com tempo bom.
 * **A Solução:** Integrar com APIs de tráfego aéreo (FlightAware / FlightRadar24) para calcular o congestionamento das pistas.
 * **Novas Features:**
