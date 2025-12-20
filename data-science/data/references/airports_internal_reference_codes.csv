@@ -1,0 +1,33 @@
+nome_aeroporto,cidade,estado,pais,longitude,latitude,tipo,airport_internal_id,iata,icao,dist_km_to_external
+afonso pena,sao jose dos pinhais,pr,brasil,-49.1724811,-25.5327132,origem,1,CWB,SBCT,0.0023980139905968294
+salgado filho,porto alegre,rs,brasil,-51.1753811,-29.9934732,origem,2,POA,SBPA,0.003491914929808178
+miami,miami,n/i,estados unidos,-80.2870457,25.795865,origem,3,MIA,KMIA,0.0046088835128964755
+presidente juscelino kubitschek,brasilia,df,brasil,-47.9172348,-15.8697369,origem,4,BSB,SBBR,0.005539800004550515
+deputado luis eduardo magalhaes,salvador,ba,brasil,-38.3312411,-12.9110977,origem,5,SSA,SBSV,0.004461905151584451
+guarulhos - governador andre franco montoro,guarulhos,sp,brasil,-46.478126,-23.4345529,origem,6,GRU,SBGR,0.005870722911045065
+guararapes - gilberto freyre,recife,pe,brasil,-34.9240154,-8.1259315,origem,7,REC,SBRF,0.0017033946195985034
+aeroporto internacional do rio de janeiro/galeao,rio de janeiro,rj,brasil,-43.2494233,-22.8134098,origem,8,GIG,SBGL,0.002625034913471028
+new york,new york,n/i,estados unidos,-73.7781391,40.6413111,origem,9,JFK,KJFK,0.0033013260874035105
+eduardo gomes,manaus,am,brasil,-60.0463249,-3.0358474,origem,10,MAO,SBEG,0.002779942038050321
+tancredo neves,confins,mg,brasil,-43.965396,-19.634099,origem,11,CNF,SBCF,0.0004334254024795122
+viracopos,campinas,sp,brasil,-47.1375685,-23.008205,origem,12,VCP,SBKP,0.003271588663868399
+toronto,toronto,n/i,canada,-79.6248197,43.6777176,origem,13,YYZ,CYYZ,0.0016065963247142183
+madrid,madrid,n/i,espanha,-3.5679515,40.4839361,origem,14,MAD,LEMD,0.00045183482997816885
+paris,paris,n/i,franca,2.5479245,49.0096906,origem,15,CDG,LFPG,7.603338766962334e-05
+bogota,bogota,n/i,colombia,-74.1444969,4.7014128,origem,16,BOG,SKBO,0.00034426352593617073
+buenos aires,buenos aires,n/i,argentina,-58.5348284,-34.8150044,origem,17,EZE,SAEZ,0.0026384242918658838
+buenos aires/aeroparque,buenos aires/aeroparque,n/i,argentina,-58.536759,-34.816662,origem,18,AEP,SABE,0.005644734686370469
+hercilio luz,florianopolis,sc,brasil,-48.5459657,-27.670118,origem,19,FLN,SBFL,0.003926269522338875
+porto seguro,porto seguro,ba,brasil,-39.0821431,-16.4395303,origem,20,BPS,SBPS,0.005699130754142338
+roma,roma,n/i,italia,12.592979,41.7990531,origem,21,FCO,LIRF,0.0003545313990223061
+santos dumont,rio de janeiro,rj,brasil,-43.1648755,-22.9111438,origem,22,SDU,SBRJ,0.005478783048324644
+eurico de aguiar salles,vitoria,es,brasil,-40.2835346,-20.2576489,origem,23,VIX,SBVT,0.006526346850558944
+leite lopes,ribeirao preto,sp,brasil,-47.7751674,-21.1347507,origem,24,RAO,SBRP,0.006440754527905624
+altamira,altamira,pa,brasil,-52.2490864,-3.2535656,origem,25,ATM,SBAT,0.001587107357988132
+val de cans,belem,pa,brasil,-48.4775227,-1.3820615,origem,26,BEL,SBBE,0.0025288969006792192
+marechal rondon,varzea grande,mt,brasil,-56.1172687,-15.6530786,origem,27,CGB,SBCY,0.004110198205046308
+pampulha - carlos drummond de andrade,belo horizonte,mg,brasil,-43.9548899,-19.8498475,origem,28,PLU,SBBH,0.005386356649708378
+zumbi dos palmares,rio largo,al,brasil,-35.7928829,-9.5116056,origem,29,MCZ,SBMO,0.0019380648763623225
+prefeito renato moreira,imperatriz,ma,brasil,-47.4560696,-5.5316945,origem,30,IMP,SBIZ,0.003401587975792711
+nan,nan,nan,nan,,,origem,31,,,
+governador aluizio alves,natal,rn,brasil,-35.3673819,-5.7683702,destino,32,NAT,SBSG,0.0020025604068809786
