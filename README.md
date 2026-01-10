@@ -1,4 +1,3 @@
-Markdown
 # 🛫 FlightOnTime - Sistema Inteligente de Previsão de Voos
 
 > **Status do Projeto:** Em Produção (v5.0.0-LiveWeather)  
@@ -8,7 +7,7 @@ O **FlightOnTime** é uma solução completa para prever atrasos em voos comerci
 
 ---
 
-## 🏗 Estrutura do Repositório
+##  Estrutura do Repositório
 
 Este repositório agrupa todas as camadas da aplicação:
 
@@ -17,8 +16,10 @@ Este repositório agrupa todas as camadas da aplicação:
 ├── data-science/  # Core de ML (Python, CatBoost, FastAPI)
 ├── back-end/      # API Gateway e Regras de Negócio (Java, Spring Boot)
 └── front-end/     # Interface do Usuário (React, Vite, Tailwind)
-🧠 1. Data Science & Inteligência Artificial
+ 1. Data Science & Inteligência Artificial
 Diretório: /data-science
+
+**[📄 Ver Documentação Técnica (Data Science)](./data-science/README.md)**
 
 O "cérebro" do projeto. Responsável por calcular a probabilidade matemática de um atraso.
 
@@ -33,6 +34,8 @@ API: FastAPI (Python).
 ☕ 2. Backend API
 Diretório: /back-end
 
+**[📄 Ver Documentação Técnica (Backend)](./back-end/README.md)**
+
 O orquestrador do sistema. Gerencia as requisições, conecta-se ao motor de IA e aplica regras de negócio.
 
 Tecnologia: Java 21 + Spring Boot 3.5.4.
@@ -44,13 +47,15 @@ Funcionalidade: Recebe os dados do voo, consulta o microserviço de Data Science
 💻 3. Frontend Dashboard
 Diretório: /front-end
 
+**[📄 Ver Documentação Técnica (Frontend)](./front-end/README.md)**
+
 A interface visual para o usuário final.
 
 Tecnologia: React + Vite + Tailwind CSS.
 
 UX: Autocomplete inteligente para aeroportos e companhias, validação de códigos IATA e exibição visual do "Semáforo de Risco".
 
-🚀 Como Executar o Projeto Completo
+Como Executar o Projeto Completo
 Para rodar a aplicação inteira localmente, você precisará de 3 terminais abertos (um para cada serviço).
 
 Passo 1: Iniciar o Motor de IA (Data Science)
@@ -89,7 +94,7 @@ npm install
 npm run dev
 O Frontend estará disponível em http://localhost:5173.
 
-🚦 Regra de Negócio: O Semáforo de Risco
+Regra de Negócio: O Semáforo de Risco
 O sistema traduz a probabilidade matemática em uma experiência visual simples:
 
 🟢 PONTUAL (Risco < 35%): Boas condições de voo e clima estável.
@@ -98,7 +103,7 @@ O sistema traduz a probabilidade matemática em uma experiência visual simples:
 
 🔴 ATRASO PROVÁVEL (Risco > 70%): Condições críticas (Tempestade, Feriados).
 
-🛠 Stack Tecnológico Geral
+Stack Tecnológico Geral
 Linguagens: Python 3.10+, Java 21, JavaScript/ES6.
 
 Frameworks: FastAPI, Spring Boot, React.
@@ -106,5 +111,3 @@ Frameworks: FastAPI, Spring Boot, React.
 Dados: MySQL, Open-Meteo API, Kaggle Flight Data.
 
 DevOps: Docker, OCI (Oracle Cloud), Git Monorepo.
-
-Nota: Para documentação detalhada de endpoints, treinamento de modelos ou componentes visuais, consulte o README.md específico dentro de cada pasta do projeto.
