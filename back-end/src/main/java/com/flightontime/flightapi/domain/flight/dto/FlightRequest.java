@@ -1,6 +1,7 @@
 package com.flightontime.flightapi.domain.flight.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public record FlightRequest(
         String destination,
 
         @JsonProperty("data_partida")
+        @Future
         @NotNull LocalDateTime departureDate
 ) {
 }
