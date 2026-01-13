@@ -26,13 +26,17 @@ public class SpringDocConfigurations {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")))
                         .info(new Info()
-                                .title("Flight On Time - Java backend API")
+                                .title("Flight On Time API")
                                 .version(version)
-                                .summary("summary: to do")
-                                .description("description: to do")
+                                .summary("REST API para previsão de status de voos")
+                                .description("""
+                                        API Back-End desenvolvida em Java com Spring Boot que fornece previsões sobre o status de voos utilizando modelo de Data Science.
+
+                                        **Stack:** Java 21, Spring Boot 3.5.4, MySQL, Flyway, Resilience4j
+                                        """)
                                 .contact(new Contact()
                                         .name("Github")
-                                        .url("https://github.com/rrbotlab/flight-on-time-api"))
+                                        .url("https://github.com/dragoscalin33/flight-on-time-ds/"))
                         .license(new License()
                                 .name("MIT")));
     }
