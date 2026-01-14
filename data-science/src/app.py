@@ -56,8 +56,7 @@ def get_live_weather(lat, long, date_time_str):
         # OpenMeteo Endpoint
         # Nota: Pedimos timezone Sao_Paulo para alinhar com a API, 
         # mas a hora de entrada já está alinhada com o modelo.
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=precipitation,wind_speed_10m&start_date={date_str}&end_date={date_str}&timezone=America%2FSao_Paulo"
-        
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=precipitation,wind_speed_10m&start_date={date_str}&end_date={date_str}&timezone=UTC"
         response = requests.get(url, timeout=3) # Timeout curto para não travar a API
         if response.status_code == 200:
             data = response.json()
